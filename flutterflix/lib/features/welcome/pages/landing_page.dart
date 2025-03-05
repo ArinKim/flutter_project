@@ -16,11 +16,14 @@ class _LandingPageState extends State<LandingPage> {
     return Scaffold(
       appBar: Appbar(),
       body: DecoratedBox(
-        decoration: BoxDecoration(image: DecorationImage(image: AssetImage('/assets/images/landing-background.png'), fit: BoxFit.cover)),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: const [Text('Welcome to Flutterflix'), SizedBox(height: 20), Text('Your one-stop shop for all things Flutter')],
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('images/landing-background.png'),
+            fit: BoxFit.cover,
+            colorFilter: ColorFilter.mode(Colors.black45, BlendMode.colorBurn),
+          ),
         ),
+        child: Center(child: Text('Welcome to Flutterflix', style: TextStyle(color: Colors.white, fontSize: 32))),
       ),
     );
   }
