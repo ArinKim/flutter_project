@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "883516222188",
+    "project_id": "flutter-training-194b2",
+    "storage_bucket": "flutter-training-194b2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:883516222188:android:9344007f75721e7a8e53c9",
+        "android_client_info": {
+          "package_name": "com.example.fluttergram"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyATt_y0VTKFzqLBjGa8HoEKxkAJo0RTP3c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
