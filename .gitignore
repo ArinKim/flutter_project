@@ -43,3 +43,22 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# FVM Version Cache
+.fvm/
+# Firebase Config - Flutter
+/lib/firebase_options*.dart
+
+# Firebase Config - Android
+/android/app/src/**/**/google-services.json
+/android/app/google-services.json
+
+# Firebase Config - iOS
+/ios/config/**/GoogleService-Info.plist
+/ios/Runner/GoogleService-Info.plist
+/ios/firebase_app_id_file.json
+
+# FVM Related Files
+.fvm/
+.vscode/settings.json
+.fvmrc
