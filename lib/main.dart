@@ -11,22 +11,11 @@ import 'package:fluttergram/responsive/web_layout.dart';
 import 'package:fluttergram/pages/login_page.dart';
 import 'package:fluttergram/utils/colours.dart';
 import 'package:provider/provider.dart';
+import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  if (kIsWeb) {
-    await Firebase.initializeApp(
-      options: const FirebaseOptions(
-        apiKey: "_API_KEY_",
-        appId: "_APP_ID_",
-        messagingSenderId: "_SENDER_ID",
-        projectId: "_PROJECT_ID_",
-        storageBucket: "_BUCKET_",
-      ),
-    );
-  } else {
-    await Firebase.initializeApp();
-  }
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const MyApp());
 }
 
@@ -37,20 +26,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(
-          create: (_) => UserProvider(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => PageProvider(),
-        ),
-      ],
+      providers: [ChangeNotifierProvider(create: (_) => UserProvider()), ChangeNotifierProvider(create: (_) => PageProvider())],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Insta Demo',
-        theme: ThemeData.dark().copyWith(
-          scaffoldBackgroundColor: mobileBackgroundColour,
-        ),
+        theme: ThemeData.dark().copyWith(scaffoldBackgroundColor: mobileBackgroundColour),
         home: StreamBuilder(
           stream: FirebaseAuth.instance.authStateChanges(),
           builder: (context, snapshot) {
@@ -65,17 +45,11 @@ class MyApp extends StatelessWidget {
                 }
                 return const ResLayout(webScreenLayout: WebLayout(), mobileScreenLayout: MobileLayout());
               } else if (snapshot.hasError) {
-                return Center(
-                  child: Text('${snapshot.error}'),
-                );
+                return Center(child: Text('${snapshot.error}'));
               }
             }
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(
-                child: CircularProgressIndicator(
-                  color: primaryColor,
-                ),
-              );
+              return const Center(child: CircularProgressIndicator(color: primaryColor));
             }
             return const LoginPage();
           },

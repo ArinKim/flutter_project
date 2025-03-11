@@ -11,7 +11,7 @@ import 'package:fluttergram/utils/utils.dart';
 import 'package:fluttergram/widgets/txt_input.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:fluttergram/models/user.dart' as model;
+import 'package:fluttergram/models/user/user.dart' as model;
 
 class CommentPage extends StatefulWidget {
   final arguments;

@@ -7,9 +7,28 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:883516222188:android:9344007f75721e7a8e53c9",
+        "mobilesdk_app_id": "1:883516222188:android:51bda054657378a38e53c9",
         "android_client_info": {
           "package_name": "com.example.fluttergram"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyATt_y0VTKFzqLBjGa8HoEKxkAJo0RTP3c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:883516222188:android:9344007f75721e7a8e53c9",
+        "android_client_info": {
+          "package_name": "com.example.inst_clone"
         }
       },
       "oauth_client": [],
