@@ -12,8 +12,8 @@ _Post _$PostFromJson(Map<String, dynamic> json) => _Post(
       photoUrl: json['photoUrl'] as String,
       description: json['description'] as String,
       postId: json['postId'] as String,
-      timestamp: json['timestamp'] as String,
-      likes: json['likes'] as String? ?? '0',
+      timestamp: DateTime.parse(json['timestamp'] as String),
+      likes: (json['likes'] as List<dynamic>).map((e) => e as String).toList(),
     );
 
 Map<String, dynamic> _$PostToJson(_Post instance) => <String, dynamic>{
@@ -22,6 +22,6 @@ Map<String, dynamic> _$PostToJson(_Post instance) => <String, dynamic>{
       'photoUrl': instance.photoUrl,
       'description': instance.description,
       'postId': instance.postId,
-      'timestamp': instance.timestamp,
+      'timestamp': instance.timestamp.toIso8601String(),
       'likes': instance.likes,
     };

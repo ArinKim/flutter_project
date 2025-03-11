@@ -24,20 +24,20 @@ abstract class User with _$User {
     return User(uid: '', email: '', password: '', username: '', bio: '', followers: '', followings: '', photoUrl: '');
   }
 
-  // static User? fromDocument(DocumentSnapshot document) {
-  //   if (document == null || document.data == null) return null;
-
-  //   return User(
-  //     uid: document.data['uid'],
-  //     email: document.data['email'],
-  //     password: document.data['password'],
-  //     username: document.data['username'],
-  //     bio: document.data['bio'],
-  //     followers: document.data['followers'],
-  //     followings: document.data['followings'],
-  //     photoUrl: document.data['photoUrl'],
-  //   );
-  // }
+  static User? fromDocument(DocumentSnapshot document) {
+    dynamic data = document.data();
+    if (data == null || data.data == null) return null;
+    return User(
+      uid: data.data['uid'],
+      email: data.data['email'],
+      password: data.data['password'],
+      username: data.data['username'],
+      bio: data.data['bio'],
+      followers: data.data['followers'],
+      followings: data.data['followings'],
+      photoUrl: data.data['photoUrl'],
+    );
+  }
 }
 
 // class User {

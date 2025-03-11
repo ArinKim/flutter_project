@@ -20,8 +20,8 @@ mixin _$Post {
   String get photoUrl;
   String get description;
   String get postId;
-  String get timestamp;
-  String get likes;
+  DateTime get timestamp;
+  List<String> get likes;
 
   /// Create a copy of Post
   /// with the given fields replaced by the non-null parameter values.
@@ -48,13 +48,20 @@ mixin _$Post {
             (identical(other.postId, postId) || other.postId == postId) &&
             (identical(other.timestamp, timestamp) ||
                 other.timestamp == timestamp) &&
-            (identical(other.likes, likes) || other.likes == likes));
+            const DeepCollectionEquality().equals(other.likes, likes));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, username, userId, photoUrl,
-      description, postId, timestamp, likes);
+  int get hashCode => Object.hash(
+      runtimeType,
+      username,
+      userId,
+      photoUrl,
+      description,
+      postId,
+      timestamp,
+      const DeepCollectionEquality().hash(likes));
 
   @override
   String toString() {
@@ -73,8 +80,8 @@ abstract mixin class $PostCopyWith<$Res> {
       String photoUrl,
       String description,
       String postId,
-      String timestamp,
-      String likes});
+      DateTime timestamp,
+      List<String> likes});
 }
 
 /// @nodoc
@@ -121,11 +128,11 @@ class _$PostCopyWithImpl<$Res> implements $PostCopyWith<$Res> {
       timestamp: null == timestamp
           ? _self.timestamp
           : timestamp // ignore: cast_nullable_to_non_nullable
-              as String,
+              as DateTime,
       likes: null == likes
           ? _self.likes
           : likes // ignore: cast_nullable_to_non_nullable
-              as String,
+              as List<String>,
     ));
   }
 }
@@ -140,7 +147,8 @@ class _Post implements Post {
       required this.description,
       required this.postId,
       required this.timestamp,
-      this.likes = '0'});
+      required final List<String> likes})
+      : _likes = likes;
   factory _Post.fromJson(Map<String, dynamic> json) => _$PostFromJson(json);
 
   @override
@@ -154,10 +162,14 @@ class _Post implements Post {
   @override
   final String postId;
   @override
-  final String timestamp;
+  final DateTime timestamp;
+  final List<String> _likes;
   @override
-  @JsonKey()
-  final String likes;
+  List<String> get likes {
+    if (_likes is EqualUnmodifiableListView) return _likes;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_likes);
+  }
 
   /// Create a copy of Post
   /// with the given fields replaced by the non-null parameter values.
@@ -189,13 +201,20 @@ class _Post implements Post {
             (identical(other.postId, postId) || other.postId == postId) &&
             (identical(other.timestamp, timestamp) ||
                 other.timestamp == timestamp) &&
-            (identical(other.likes, likes) || other.likes == likes));
+            const DeepCollectionEquality().equals(other._likes, _likes));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, username, userId, photoUrl,
-      description, postId, timestamp, likes);
+  int get hashCode => Object.hash(
+      runtimeType,
+      username,
+      userId,
+      photoUrl,
+      description,
+      postId,
+      timestamp,
+      const DeepCollectionEquality().hash(_likes));
 
   @override
   String toString() {
@@ -215,8 +234,8 @@ abstract mixin class _$PostCopyWith<$Res> implements $PostCopyWith<$Res> {
       String photoUrl,
       String description,
       String postId,
-      String timestamp,
-      String likes});
+      DateTime timestamp,
+      List<String> likes});
 }
 
 /// @nodoc
@@ -263,11 +282,11 @@ class __$PostCopyWithImpl<$Res> implements _$PostCopyWith<$Res> {
       timestamp: null == timestamp
           ? _self.timestamp
           : timestamp // ignore: cast_nullable_to_non_nullable
-              as String,
+              as DateTime,
       likes: null == likes
-          ? _self.likes
+          ? _self._likes
           : likes // ignore: cast_nullable_to_non_nullable
-              as String,
+              as List<String>,
     ));
   }
 }

@@ -12,8 +12,8 @@ abstract class Comment with _$Comment {
     required String commentId,
     required String comment,
     required String postId,
-    required String timestamp,
-    required String likes,
+    required DateTime timestamp,
+    required List<String> likes,
   }) = _Comment;
   factory Comment.fromJson(Map<String, dynamic> json) => _$CommentFromJson(json);
 }

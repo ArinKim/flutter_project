@@ -2,9 +2,9 @@ import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:fluttergram/models/post.dart' as post_model;
-import 'package:fluttergram/models/user.dart' as usr_model;
-import 'package:fluttergram/models/comment.dart' as comment_model;
+import 'package:fluttergram/models/post/post.dart' as post_model;
+import 'package:fluttergram/models/user/user.dart' as usr_model;
+import 'package:fluttergram/models/comment/comment.dart' as comment_model;
 import 'package:fluttergram/resources/storage_meth.dart';
 import 'package:uuid/uuid.dart';
 
@@ -167,10 +167,10 @@ class FirestoreMethods {
 
 // This function can be used in both post and comment
 // To get posting user avatar
-  Future<Map<String, dynamic>> getPostingUser(String col, String docId) async {
+  Future<Map<String, dynamic>?> getPostingUser(String col, String docId) async {
     var collection = FirebaseFirestore.instance.collection(col);
     DocumentSnapshot docSnapshot = await collection.doc(docId).get();
 
-    return usr_model.User.getUserFromSnap(docSnapshot).toJson();
+    return usr_model.User.fromDocument(docSnapshot)?.toJson();
   }
 }

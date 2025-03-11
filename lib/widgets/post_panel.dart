@@ -12,7 +12,7 @@ import 'package:fluttergram/routes/comment_page_route.dart';
 import 'package:fluttergram/utils/colours.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:fluttergram/models/user.dart' as model;
+import 'package:fluttergram/models/user/user.dart' as model;
 import 'package:share_plus/share_plus.dart';
 
 class PostPanel extends StatefulWidget {
@@ -34,7 +34,7 @@ class _PostPanelState extends State<PostPanel> {
     final model.User user = Provider.of<UserProvider>(context).getUser;
 
     Future<String> getPostUser(String col, String doc) async {
-      var url = await FirestoreMethods().getPostingUser(col, doc).then((value) => value.values.toList()[6]);
+      var url = await FirestoreMethods().getPostingUser(col, doc).then((value) => value!.values.toList()[6]);
       return url;
     }
 

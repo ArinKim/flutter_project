@@ -12,8 +12,8 @@ _Comment _$CommentFromJson(Map<String, dynamic> json) => _Comment(
       commentId: json['commentId'] as String,
       comment: json['comment'] as String,
       postId: json['postId'] as String,
-      timestamp: json['timestamp'] as String,
-      likes: json['likes'] as String,
+      timestamp: DateTime.parse(json['timestamp'] as String),
+      likes: (json['likes'] as List<dynamic>).map((e) => e as String).toList(),
     );
 
 Map<String, dynamic> _$CommentToJson(_Comment instance) => <String, dynamic>{
@@ -22,6 +22,6 @@ Map<String, dynamic> _$CommentToJson(_Comment instance) => <String, dynamic>{
       'commentId': instance.commentId,
       'comment': instance.comment,
       'postId': instance.postId,
-      'timestamp': instance.timestamp,
+      'timestamp': instance.timestamp.toIso8601String(),
       'likes': instance.likes,
     };

@@ -57,7 +57,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
     try {
       var postUser = await FirestoreMethods().getPostingUser('users', widget.uid);
 
-      userDet = postUser.map(
+      userDet = postUser!.map(
         (key, value) {
           return MapEntry(key, value);
         },

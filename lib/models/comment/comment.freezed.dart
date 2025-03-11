@@ -20,8 +20,8 @@ mixin _$Comment {
   String get commentId;
   String get comment;
   String get postId;
-  String get timestamp;
-  String get likes;
+  DateTime get timestamp;
+  List<String> get likes;
 
   /// Create a copy of Comment
   /// with the given fields replaced by the non-null parameter values.
@@ -47,13 +47,13 @@ mixin _$Comment {
             (identical(other.postId, postId) || other.postId == postId) &&
             (identical(other.timestamp, timestamp) ||
                 other.timestamp == timestamp) &&
-            (identical(other.likes, likes) || other.likes == likes));
+            const DeepCollectionEquality().equals(other.likes, likes));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, username, userId, commentId,
-      comment, postId, timestamp, likes);
+      comment, postId, timestamp, const DeepCollectionEquality().hash(likes));
 
   @override
   String toString() {
@@ -72,8 +72,8 @@ abstract mixin class $CommentCopyWith<$Res> {
       String commentId,
       String comment,
       String postId,
-      String timestamp,
-      String likes});
+      DateTime timestamp,
+      List<String> likes});
 }
 
 /// @nodoc
@@ -120,11 +120,11 @@ class _$CommentCopyWithImpl<$Res> implements $CommentCopyWith<$Res> {
       timestamp: null == timestamp
           ? _self.timestamp
           : timestamp // ignore: cast_nullable_to_non_nullable
-              as String,
+              as DateTime,
       likes: null == likes
           ? _self.likes
           : likes // ignore: cast_nullable_to_non_nullable
-              as String,
+              as List<String>,
     ));
   }
 }
@@ -139,7 +139,8 @@ class _Comment implements Comment {
       required this.comment,
       required this.postId,
       required this.timestamp,
-      required this.likes});
+      required final List<String> likes})
+      : _likes = likes;
   factory _Comment.fromJson(Map<String, dynamic> json) =>
       _$CommentFromJson(json);
 
@@ -154,9 +155,14 @@ class _Comment implements Comment {
   @override
   final String postId;
   @override
-  final String timestamp;
+  final DateTime timestamp;
+  final List<String> _likes;
   @override
-  final String likes;
+  List<String> get likes {
+    if (_likes is EqualUnmodifiableListView) return _likes;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_likes);
+  }
 
   /// Create a copy of Comment
   /// with the given fields replaced by the non-null parameter values.
@@ -187,13 +193,13 @@ class _Comment implements Comment {
             (identical(other.postId, postId) || other.postId == postId) &&
             (identical(other.timestamp, timestamp) ||
                 other.timestamp == timestamp) &&
-            (identical(other.likes, likes) || other.likes == likes));
+            const DeepCollectionEquality().equals(other._likes, _likes));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, username, userId, commentId,
-      comment, postId, timestamp, likes);
+      comment, postId, timestamp, const DeepCollectionEquality().hash(_likes));
 
   @override
   String toString() {
@@ -213,8 +219,8 @@ abstract mixin class _$CommentCopyWith<$Res> implements $CommentCopyWith<$Res> {
       String commentId,
       String comment,
       String postId,
-      String timestamp,
-      String likes});
+      DateTime timestamp,
+      List<String> likes});
 }
 
 /// @nodoc
@@ -261,11 +267,11 @@ class __$CommentCopyWithImpl<$Res> implements _$CommentCopyWith<$Res> {
       timestamp: null == timestamp
           ? _self.timestamp
           : timestamp // ignore: cast_nullable_to_non_nullable
-              as String,
+              as DateTime,
       likes: null == likes
-          ? _self.likes
+          ? _self._likes
           : likes // ignore: cast_nullable_to_non_nullable
-              as String,
+              as List<String>,
     ));
   }
 }

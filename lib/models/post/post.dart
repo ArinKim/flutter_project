@@ -12,8 +12,8 @@ abstract class Post with _$Post {
     required String photoUrl,
     required String description,
     required String postId,
-    required String timestamp,
-    @Default('0') String likes,
+    required DateTime timestamp,
+    required List<String> likes,
   }) = _Post;
 
   factory Post.fromJson(Map<String, Object?> json) => _$PostFromJson(json);

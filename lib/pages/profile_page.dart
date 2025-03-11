@@ -11,7 +11,7 @@ import 'package:fluttergram/responsive/web_layout.dart';
 import 'package:fluttergram/utils/colours.dart';
 import 'package:fluttergram/utils/utils.dart';
 import 'package:provider/provider.dart';
-import 'package:fluttergram/models/user.dart' as model;
+import 'package:fluttergram/models/user/user.dart' as model;
 
 class ProfilePage extends StatefulWidget {
   final uid;
@@ -64,7 +64,7 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
 
       var postUser = await FirestoreMethods().getPostingUser('users', widget.uid);
 
-      userDet = postUser.map(
+      userDet = postUser!.map(
         (key, value) {
           return MapEntry(key, value);
         },
