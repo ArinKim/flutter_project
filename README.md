@@ -1,6 +1,6 @@
 # fluttergram
 
-A new Flutter project.
+This is a project to clone Instagram using Dart, including Flutter and GCP Firestore for database and authentication.
 
 ## Getting Started
 
